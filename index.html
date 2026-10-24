@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerGuard | Smart Electrical System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="brand">
+            <div class="logo">⚡</div>
+            <div>
+                <h1>PowerGuard</h1>
+                <p>Smart Electrical Monitoring System</p>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <div id="dateTime" class="date-time">Loading time...</div>
+            <button class="theme-btn" id="darkModeBtn"
+                onclick="toggleDarkMode()">🌙 Dark Mode</button>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="welcome">
+            <div>
+                <span class="eyebrow">ELECTRICAL SAFETY & MONITORING</span>
+                <h2>Monitor smarter. <span>Protect better.</span></h2>
+                <p>
+                    Monitor transformer loading, check electrical fault
+                    readings, and calculate power factor improvement.
+                </p>
+            </div>
+            <div class="welcome-icon">⚡</div>
+        </section>
+
+        <section class="section-heading">
+            <div>
+                <h2>System Overview</h2>
+                <p>Your electrical monitoring dashboard</p>
+            </div>
+            <span class="status-pill">● System Ready</span>
+        </section>
+
+        <section class="metrics">
+            <article class="metric-card">
+                <div class="metric-icon">⚡</div>
+                <p>Voltage</p>
+                <h3 id="metricVoltage">-- <small>V</small></h3>
+                <span>Latest reading</span>
+            </article>
+
+            <article class="metric-card">
+                <div class="metric-icon">〽️</div>
+                <p>Current</p>
+                <h3 id="metricCurrent">-- <small>A</small></h3>
+                <span>Latest reading</span>
+            </article>
+
+            <article class="metric-card">
+                <div class="metric-icon">🔌</div>
+                <p>Transformer Load</p>
+                <h3 id="metricLoad">-- <small>%</small></h3>
+                <span id="metricLoadStatus">Waiting for calculation</span>
+            </article>
+
+            <article class="metric-card">
+                <div class="metric-icon">📈</div>
+                <p>Power Factor</p>
+                <h3 id="metricPF">--</h3>
+                <span>Latest calculated value</span>
+            </article>
+        </section>
+
+        <section class="section-heading modules-heading">
+            <div>
+                <h2>Monitoring Modules</h2>
+                <p>Select a module to enter your readings</p>
+            </div>
+        </section>
+
+        <section class="modules">
+            <article class="module-card transformer-card">
+                <div class="module-top">
+                    <div class="module-icon">🔋</div>
+                    <span class="module-number">01</span>
+                </div>
+                <h3>Transformer Load Monitoring</h3>
+                <p>
+                    Calculate transformer loading and identify
+                    possible overloading conditions.
+                </p>
+                <button onclick="loadMonitoring()">
+                    Open Load Monitor <span>→</span>
+                </button>
+            </article>
+
+            <article class="module-card fault-card">
+                <div class="module-top">
+                    <div class="module-icon">🛡️</div>
+                    <span class="module-number">02</span>
+                </div>
+                <h3>Electrical Fault Detection</h3>
+                <p>
+                    Check voltage and current readings against
+                    the limits you enter.
+                </p>
+                <button onclick="faultDetection()">
+                    Check Electrical Faults <span>→</span>
+                </button>
+            </article>
+
+            <article class="module-card pf-card">
+                <div class="module-top">
+                    <div class="module-icon">📊</div>
+                    <span class="module-number">03</span>
+                </div>
+                <h3>Power Factor Improvement</h3>
+                <p>
+                    Estimate the capacitor bank requirement
+                    for your target power factor.
+                </p>
+                <button onclick="powerFactor()">
+                    Improve Power Factor <span>→</span>
+                </button>
+            </article>
+        </section>
+
+        <section class="work-area">
+            <div class="section-heading">
+                <div>
+                    <h2>Module Workspace</h2>
+                    <p>Enter your values to calculate results</p>
+                </div>
+            </div>
+
+            <div id="output" class="output-panel">
+                <div class="empty-state">
+                    <div class="empty-icon">⚙️</div>
+                    <h3>Ready to get started?</h3>
+                    <p>
+                        Select any monitoring module above.
+                        Its input fields and results will appear here.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="history-section">
+            <div class="section-heading">
+                <div>
+                    <h2>Activity History</h2>
+                    <p>Your recent calculations and checks</p>
+                </div>
+                <button class="clear-btn" onclick="clearHistory()">
+                    Clear History
+                </button>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Module</th>
+                            <th>Result</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody">
+                        <tr>
+                            <td colspan="4" class="no-history">
+                                No activity yet. Run a calculation to
+                                see your history here.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="about-icon">⚡</div>
+            <div>
+                <span class="eyebrow">ABOUT THE PROJECT</span>
+                <h2>About PowerGuard</h2>
+                <p>
+                    PowerGuard is an educational electrical monitoring
+                    project that combines transformer load monitoring,
+                    electrical fault indication, and power factor
+                    improvement calculations in one dashboard.
+                </p>
+                <p class="safety-note">
+                    <strong>Safety note:</strong> This website analyses
+                    entered values only. It does not connect to real
+                    electrical equipment, detect live faults, or
+                    automatically disconnect the power supply.
+                    Electrical work must be handled by qualified personnel.
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            <p>⚡ PowerGuard — Smart Electrical Monitoring System</p>
+            <span>Educational Project</span>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
